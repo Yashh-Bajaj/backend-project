@@ -4,19 +4,31 @@ const path = require("path");
 
 const { fn, col } = require("sequelize");
 
-const toLoginForm = (req, res) => {
-  const id = req.query.id;
-  const password = req.query.password;
+const toLoginForm = async (req, res) => {
+  const { id, password } = req.query;
 
-  if (
-    (id === "customer1" || id === "customer2") &&
-    (password === "customer1" || password === "customer2")
-  ) {
-    res.redirect("/orderdetails");
-  } else if (id === "admin" && password === "admin") {
-    res.redirect("/admin");
-  } else {
-    res.render(path.join(__dirname, "../views/login.hbs"));
+  if (!id || !password) {
+    res.render(path.join(__dirname, "../views/login.hbs"), { content: 'Please provide both id and password' });
+    return; // Stop execution if id or password is missing
+  }
+
+  try {
+    const customerFind = await Customer.findAll({
+      where: { id: id, password: password }
+    });
+
+    if (customerFind.length === 0) {
+      res.render(path.join(__dirname, "../views/login.hbs"), { content: 'Please check your id and password' });
+    } else if (customerFind[0].id === 'admin' && customerFind[0].password === 'admin') {
+      res.redirect("/admin");
+    } else if (customerFind[0].id === id && customerFind[0].password === password) {
+      res.redirect("/orderdetails");
+    } else {
+      res.render(path.join(__dirname, "../views/login.hbs"), { content: 'Please check your id and password' });
+    }
+  } catch (error) {
+    res.status(500).send("An error occurred");
+    console.error(error);
   }
 };
 
@@ -80,23 +92,21 @@ const tableInfo = async (req, res) => {
         customer1[0].totalquantity1 ? customer1[0].totalquantity1 : "No value inserted",
         customer2[0].totalquantity2 ? customer2[0].totalquantity2 : "No value inserted",
         (customer2[0].totalquantity2 ? parseInt(customer2[0].totalquantity2) : 0) +
-        (customer1[0].totalquantity1 ? parseInt(customer1[0].totalquantity1) : 0) 
-          ,
+        (customer1[0].totalquantity1 ? parseInt(customer1[0].totalquantity1) : 0),
       ],
       [
         "Weight",
         customer1[0].totalweight1 ? customer1[0].totalweight1 : "No value inserted",
         customer2[0].totalweight2 ? customer2[0].totalweight2 : "No value inserted",
-        (customer2[0].totalweight2 ? customer2[0].totalweight2 : 0)+
-        (customer1[0].totalweight1 ? customer1[0].totalweight1 : 0) 
-          ,
+        (customer2[0].totalweight2 ? customer2[0].totalweight2 : 0) +
+        (customer1[0].totalweight1 ? customer1[0].totalweight1 : 0),
       ],
       [
         "Box Count",
         customer1[0].totalboxcount1 ? customer1[0].totalboxcount1 : "No value inserted",
         customer2[0].totalboxcount2 ? customer2[0].totalboxcount2 : "No value inserted",
         (customer1[0].totalboxcount1 ? parseInt(customer1[0].totalboxcount1) : 0) +
-          (customer2[0].totalboxcount2 ? parseInt(customer2[0].totalboxcount2) : 0),
+        (customer2[0].totalboxcount2 ? parseInt(customer2[0].totalboxcount2) : 0),
       ],
     ];
 
