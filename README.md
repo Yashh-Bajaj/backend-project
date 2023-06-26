@@ -15,10 +15,11 @@ This project is a Node.js web application built with Express.js and Sequelize.
 - Sequelize (MySQL, PostgreSQL, or other supported databases)
 - HTML/CSS
 - JavaScript
+- HandleBars
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your/repository.git`
+1. Clone the repository: `git clone https://github.com/Yash-Bajaj/repository.git`
 2. Install dependencies: `npm install`
 
 ## Configuration
@@ -29,6 +30,7 @@ This project is a Node.js web application built with Express.js and Sequelize.
 ## Usage
 
 - Start the development server: `npm run dev`
+- Start the main server : `npm start`
 - Access the application in your browser: `http://localhost:3000`
 
 ## Folder Structure
