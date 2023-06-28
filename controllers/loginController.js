@@ -9,7 +9,7 @@ const toLoginForm = async (req, res) => {
 
   if (!id || !password) {
     res.render(path.join(__dirname, "../views/login.hbs"), { content: 'Please provide both id and password' });
-    return; // Stop execution if id or password is missing
+    return; 
   }
 
   try {
