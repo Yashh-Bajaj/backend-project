@@ -10,6 +10,8 @@ const { tableInfo } = require("./controllers/loginController");
 
 const app = express();
 
+
+
 const corOptions = {
   origin: "http://localhost:3000",
 };

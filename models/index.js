@@ -1,7 +1,10 @@
 
 const sequelize = require('../config/database')
+const Order = require('./order')
+const Customer = require('./customer')
 
-
+Customer.hasMany(Order);
+Order.belongsTo(Customer);
 
 const connectToDb = async()=>{
     try {

@@ -56,8 +56,22 @@
       cursor: pointer;
       font-size: 16px;
     }
+    #button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
 
     input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    #button:hover {
       background-color: #45a049;
     }
   </style>
@@ -67,23 +81,20 @@
   <h1>Order Form</h1>
 
   <form action="/orderdetails" method="post">
+
+    <label for="id">Id:</label>
+    <input type="text" id="id" name="id" required>
+
     <label for="orderdate">Order Date:</label>
-    <input type="date" id="orderdate" pattern="\d{4}/\d{2}/\d{2}" name="orderdate" required>
+    <input type="date" id="orderdate"  name="orderdate" required>
 
-    <label for="customer">Customer Number:</label>
-    <input type="text" id="customer" name="customer" required>
 
-    <label for="company">Company:</label>
-    <input type="text" id="company" name="company" required>
-
-    <label for="owner">Owner:</label>
-    <input type="text" id="owner" name="owner" required>
 
     <label for="item">Item:</label>
     <input type="text" id="item" name="item" required>
 
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity" required>
+    <label for="count">Count:</label>
+    <input type="number" id="count" name="count" required>
 
     <label for="weight">Weight:</label>
     <input type="number" id="weight" name="weight" required>
@@ -91,22 +102,18 @@
     <label for="requestforshipment">Request for Shipment:</label>
     <input type="text" id="requestforshipment" name="requestforshipment" required>
 
-    <label for="trackid">Track ID:</label>
-    <input type="text" id="trackid" name="trackid" required>
-
-    <label for="shipmentsize">Shipment Size:</label>
-    <input type="number" id="shipmentsize" name="shipmentsize" required>
-
-    <label for="boxcount">Box Count:</label>
-    <input type="number" id="boxcount" name="boxcount" required>
-
-    <label for="specification">Specification:</label>
-    <textarea id="specification" name="specification" ></textarea>
-
-    <label for="checklistquantity">Checklist Quantity:</label>
-    <input type="number" id="checklistquantity" name="checklistquantity" required>
 
     <input type="submit" value="Submit">
+    <button id="button">View Data</button>
+    <script>
+       const button = document.getElementById('button');
+
+button.addEventListener('click', redirectToAdminPage);
+
+function redirectToAdminPage() {
+  window.location.href = '/admin';
+}
+    </script>
   </form>
 </body>
 

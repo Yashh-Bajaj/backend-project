@@ -23,12 +23,12 @@
       margin-bottom: 5px;
     }
 
-    .dynamic{
+    .dynamic {
       color: red;
-}
+    }
 
-
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -37,9 +37,12 @@
       margin-bottom: 10px;
     }
 
-    input[type="submit"] {
+    input[type="submit"],
+    input[type="button"] {
+    
       width: 100%;
       padding: 10px;
+      margin-top: 10px;
       background-color: #4CAF50;
       color: #ffffff;
       border: none;
@@ -48,23 +51,40 @@
       font-size: 16px;
     }
 
-   
-    input[type="submit"]:hover {
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
       background-color: #45a049;
     }
   </style>
+ 
 </head>
 <body>
   <form>
     <div class="dynamic">{{content}}</div>
     
-    <label for="input1">id</label>
+    <label for="id">ID</label>
     <input type="text" id="id" name="id">
 
-    <label for="input2">Password</label>
-    <input type="text" id="password" name="password">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password">
 
     <input type="submit" value="Submit">
+    <input type="button" id="changepassword" value="Change Password" >
+    <script>
+  const changepassword = document.getElementById('changepassword');
+
+function redirectToUpdatePassword() {
+ 
+  const idValue = document.getElementById('id').value;
+
+ 
+  window.location.href = `/updatepassword/${idValue}`;
+}
+
+changepassword.addEventListener('click', redirectToUpdatePassword);
+
+
+    </script>
   </form>
 </body>
 </html>

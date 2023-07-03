@@ -11,6 +11,10 @@ const Customer = sequelize.define('customer', {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    mobilenumber:{
+        type:Sequelize.INTEGER,
+        allowNull:true
     }
 }, {
     timestamps: false

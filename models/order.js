@@ -7,10 +7,6 @@ const Order = sequelize.define('order',{
         type:Sequelize.DATEONLY,
         allowNull:true,
     },
-    customer:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
     company:{
         type:Sequelize.STRING,
         allowNull:false,
@@ -23,7 +19,7 @@ const Order = sequelize.define('order',{
         type:Sequelize.STRING,
         allowNull:false,
     },
-    quantity:{
+    count:{
         type:Sequelize.INTEGER,
         allowNull:false,
     },
@@ -34,27 +30,7 @@ const Order = sequelize.define('order',{
     requestforshipment:{
         type:Sequelize.STRING,
         allowNull:false,
-    },
-    trackid:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    shipmentsize:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
-    },
-    boxcount:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
-    },
-    specification:{
-        type:Sequelize.STRING,
-        allowNull:true,
-    },
-    checklistquantity:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
-    },
+    }
 });
 
 module.exports = Order
